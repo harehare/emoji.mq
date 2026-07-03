@@ -1,0 +1,338 @@
+# GitHub-style emoji shortcode <-> Unicode emoji utilities for mq.
+# A curated subset of the most commonly used shortcodes (not the full gemoji set).
+# https://github.com/harehare/emoji.mq
+
+# Canonical shortcode -> emoji. One entry per emoji; see `_emoji_aliases`
+# for well-known alternate spellings (e.g. "+1" for "thumbsup").
+def _emoji_table():
+  {
+    "grinning": "😀",
+    "smile": "😄",
+    "smiley": "😃",
+    "grin": "😁",
+    "laughing": "😆",
+    "sweat_smile": "😅",
+    "joy": "😂",
+    "rofl": "🤣",
+    "relaxed": "☺️",
+    "blush": "😊",
+    "innocent": "😇",
+    "slight_smile": "🙂",
+    "upside_down": "🙃",
+    "wink": "😉",
+    "relieved": "😌",
+    "heart_eyes": "😍",
+    "kissing_heart": "😘",
+    "yum": "😋",
+    "stuck_out_tongue": "😛",
+    "stuck_out_tongue_winking_eye": "😜",
+    "stuck_out_tongue_closed_eyes": "😝",
+    "neutral_face": "😐",
+    "expressionless": "😑",
+    "no_mouth": "😶",
+    "smirk": "😏",
+    "unamused": "😒",
+    "roll_eyes": "🙄",
+    "thinking": "🤔",
+    "zipper_mouth": "🤐",
+    "flushed": "😳",
+    "disappointed": "😞",
+    "worried": "😟",
+    "angry": "😠",
+    "rage": "😡",
+    "cry": "😢",
+    "sob": "😭",
+    "confused": "😕",
+    "frowning": "😦",
+    "astonished": "😲",
+    "scream": "😱",
+    "fearful": "😨",
+    "cold_sweat": "😰",
+    "sleepy": "😪",
+    "sweat": "😓",
+    "tired_face": "😫",
+    "weary": "😩",
+    "triumph": "😤",
+    "sleeping": "😴",
+    "mask": "😷",
+    "sunglasses": "😎",
+    "nerd_face": "🤓",
+    "confounded": "😖",
+    "persevere": "😣",
+    "hushed": "😯",
+    "exploding_head": "🤯",
+    "partying_face": "🥳",
+    "star_struck": "🤩",
+    "monocle_face": "🧐",
+    "smiling_imp": "😈",
+    "alien": "👽",
+    "robot": "🤖",
+    "ghost": "👻",
+    "skull": "💀",
+    "poop": "💩",
+    "jack_o_lantern": "🎃",
+    "santa": "🎅",
+    "christmas_tree": "🎄",
+
+    "thumbsup": "👍",
+    "thumbsdown": "👎",
+    "ok_hand": "👌",
+    "punch": "👊",
+    "wave": "👋",
+    "raised_hand": "🖐️",
+    "open_hands": "👐",
+    "pray": "🙏",
+    "clap": "👏",
+    "muscle": "💪",
+    "point_up": "👆",
+    "point_down": "👇",
+    "point_left": "👈",
+    "point_right": "👉",
+    "raised_hands": "🙌",
+    "handshake": "🤝",
+    "fingers_crossed": "🤞",
+    "metal": "🤘",
+    "call_me_hand": "🤙",
+    "v": "✌️",
+    "eyes": "👀",
+
+    "heart": "❤️",
+    "orange_heart": "🧡",
+    "yellow_heart": "💛",
+    "green_heart": "💚",
+    "blue_heart": "💙",
+    "purple_heart": "💜",
+    "black_heart": "🖤",
+    "broken_heart": "💔",
+    "two_hearts": "💕",
+    "sparkling_heart": "💖",
+    "heartbeat": "💓",
+    "heartpulse": "💗",
+    "gift_heart": "💝",
+
+    "fire": "🔥",
+    "sparkles": "✨",
+    "star": "⭐",
+    "star2": "🌟",
+    "zap": "⚡",
+    "boom": "💥",
+    "100": "💯",
+    "tada": "🎉",
+    "confetti_ball": "🎊",
+    "balloon": "🎈",
+    "gift": "🎁",
+    "trophy": "🏆",
+    "medal": "🏅",
+    "rocket": "🚀",
+    "warning": "⚠️",
+    "no_entry": "🚫",
+    "white_check_mark": "✅",
+    "heavy_check_mark": "✔️",
+    "x": "❌",
+    "question": "❓",
+    "exclamation": "❗",
+    "bulb": "💡",
+    "speech_balloon": "💬",
+    "thought_balloon": "💭",
+    "zzz": "💤",
+    "recycle": "♻️",
+    "lock": "🔒",
+    "unlock": "🔓",
+    "key": "🔑",
+    "mag": "🔍",
+    "pushpin": "📌",
+    "round_pushpin": "📍",
+    "memo": "📝",
+    "pencil2": "✏️",
+    "book": "📖",
+    "books": "📚",
+    "bookmark": "🔖",
+    "label": "🏷️",
+    "link": "🔗",
+    "paperclip": "📎",
+    "calendar": "📅",
+    "alarm_clock": "⏰",
+    "hourglass": "⏳",
+    "email": "📧",
+    "package": "📦",
+    "inbox_tray": "📥",
+    "outbox_tray": "📤",
+    "chart_with_upwards_trend": "📈",
+    "chart_with_downwards_trend": "📉",
+    "bar_chart": "📊",
+
+    "computer": "💻",
+    "desktop_computer": "🖥️",
+    "keyboard": "⌨️",
+    "printer": "🖨️",
+    "phone": "📱",
+    "battery": "🔋",
+    "electric_plug": "🔌",
+    "gear": "⚙️",
+    "hammer": "🔨",
+    "wrench": "🔧",
+    "nut_and_bolt": "🔩",
+    "hammer_and_wrench": "🛠️",
+    "shield": "🛡️",
+    "bug": "🐛",
+    "ant": "🐜",
+    "spider": "🕷️",
+    "construction_worker": "👷",
+    "truck": "🚚",
+    "twisted_rightwards_arrows": "🔀",
+    "arrow_up": "⬆️",
+    "arrow_down": "⬇️",
+    "lipstick": "💄",
+
+    "dog": "🐶",
+    "cat": "🐱",
+    "mouse": "🐭",
+    "rabbit": "🐰",
+    "fox_face": "🦊",
+    "bear": "🐻",
+    "panda_face": "🐼",
+    "koala": "🐨",
+    "tiger": "🐯",
+    "lion": "🦁",
+    "cow": "🐮",
+    "pig": "🐷",
+    "frog": "🐸",
+    "monkey_face": "🐵",
+    "chicken": "🐔",
+    "penguin": "🐧",
+    "bird": "🐦",
+    "owl": "🦉",
+    "unicorn": "🦄",
+    "octopus": "🐙",
+
+    "pizza": "🍕",
+    "hamburger": "🍔",
+    "fries": "🍟",
+    "taco": "🌮",
+    "sushi": "🍣",
+    "ramen": "🍜",
+    "coffee": "☕",
+    "beer": "🍺",
+    "cake": "🎂",
+    "cookie": "🍪",
+    "apple": "🍎",
+    "watermelon": "🍉",
+
+    "sunny": "☀️",
+    "cloud": "☁️",
+    "rainbow": "🌈",
+    "snowflake": "❄️",
+    "earth_americas": "🌎",
+    "moon": "🌙",
+  }
+end
+
+# Alias shortcode -> canonical shortcode (well-known alternate spellings).
+def _emoji_aliases():
+  {
+    "+1": "thumbsup",
+    "-1": "thumbsdown",
+    "satisfied": "laughing",
+    "simple_smile": "slight_smile",
+    "victory": "v",
+    "raised_hand_with_fingers_splayed": "raised_hand",
+  }
+end
+
+def _emoji_reverse_table():
+  fold(entries(_emoji_table()), dict(), fn(acc, kv): set(acc, kv[1], kv[0]);)
+end
+
+def _emoji_strip_colons(s):
+  ltrimstr(rtrimstr(to_string(s), ":"), ":")
+end
+
+def _emoji_lookup_alias(name):
+  let aliases = _emoji_aliases()
+  | if (has(aliases, name)): _emoji_table()[aliases[name]] else: None
+end
+
+# Looks up the emoji for a shortcode. Accepts the name with or without
+# surrounding colons (e.g. "fire" or ":fire:") and resolves aliases
+# (e.g. "+1" -> "thumbsup"). Returns None if the shortcode is unknown.
+def emoji_for(shortcode):
+  let name = _emoji_strip_colons(shortcode)
+  | let table = _emoji_table()
+  | if (has(table, name)): table[name] else: _emoji_lookup_alias(name)
+end
+
+# Looks up the canonical shortcode for an emoji character. Returns None
+# if the emoji isn't in the table.
+def shortcode_for(e):
+  let table = _emoji_reverse_table()
+  | if (has(table, e)): table[e] else: None
+end
+
+# Returns all known canonical shortcode names, sorted.
+def shortcodes():
+  sort(keys(_emoji_table()))
+end
+
+# Replaces every recognized `:shortcode:` in a string with its emoji.
+# Unrecognized `:word:` patterns are left untouched.
+def to_emoji(text):
+  let s = to_string(text)
+  | fold(uniq(scan(s, ":[a-zA-Z0-9_+-]+:")), s, fn(acc, m):
+      let e = emoji_for(m)
+      | if (is_none(e)): acc else: replace(acc, m, e)
+    ;)
+end
+
+# Replaces every recognized emoji character in a string with its
+# canonical `:shortcode:`.
+def to_shortcode(text):
+  let s = to_string(text)
+  | fold(entries(_emoji_table()), s, fn(acc, kv):
+      if (contains(acc, kv[1])): replace(acc, kv[1], ":" + kv[0] + ":") else: acc
+    ;)
+end
+
+# Returns true if the string contains a recognized shortcode or emoji.
+def has_emoji(text):
+  let s = to_string(text)
+  | any(uniq(scan(s, ":[a-zA-Z0-9_+-]+:")), fn(m): !is_none(emoji_for(m));) ||
+    any(values(_emoji_table()), fn(e): contains(s, e);)
+end
+
+# Removes every recognized shortcode and emoji character from a string,
+# collapsing the extra spaces left behind.
+def strip(text):
+  let s = to_string(text)
+  | let s1 = fold(uniq(scan(s, ":[a-zA-Z0-9_+-]+:")), s, fn(acc, m):
+      if (is_none(emoji_for(m))): acc else: replace(acc, m, "")
+    ;)
+  | let s2 = fold(values(_emoji_table()), s1, fn(acc, e): replace(acc, e, "");)
+  | trim(gsub(s2, "[ \t]+", " "))
+end
+
+# Conventional Commits type -> gitmoji (https://gitmoji.dev), matching the
+# emoji-prefixed commit convention (feat, fix, docs, style, refactor, perf,
+# test, build, ci, chore, revert, init).
+def _gitmoji_table():
+  {
+    "feat": "✨",
+    "fix": "🐛",
+    "docs": "📝",
+    "style": "💄",
+    "refactor": "♻️",
+    "perf": "⚡",
+    "test": "✅",
+    "build": "📦",
+    "ci": "👷",
+    "chore": "🔧",
+    "revert": "⏪",
+    "init": "🎉",
+  }
+end
+
+# Returns the gitmoji conventionally associated with a Conventional Commits
+# type, or None if the type is unrecognized.
+def gitmoji(commit_type):
+  let table = _gitmoji_table()
+  | if (has(table, commit_type)): table[commit_type] else: None
+end

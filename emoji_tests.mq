@@ -1,0 +1,120 @@
+include "test"
+| include "emoji"
+|
+
+# -- emoji_for --
+
+def test_emoji_for_plain_name():
+  assert_eq(emoji_for("fire"), "🔥")
+end
+
+def test_emoji_for_with_colons():
+  assert_eq(emoji_for(":rocket:"), "🚀")
+end
+
+def test_emoji_for_alias():
+  assert_eq(emoji_for("+1"), "👍")
+  | assert_eq(emoji_for(":-1:"), "👎")
+end
+
+def test_emoji_for_unknown_returns_none():
+  assert_none(emoji_for("not_a_real_shortcode"))
+end
+
+# -- shortcode_for --
+
+def test_shortcode_for_known_emoji():
+  assert_eq(shortcode_for("🔥"), "fire")
+end
+
+def test_shortcode_for_unknown_returns_none():
+  assert_none(shortcode_for("🫠"))
+end
+
+# -- shortcodes --
+
+def test_shortcodes_contains_fire():
+  assert_true(contains(shortcodes(), "fire"))
+end
+
+def test_shortcodes_is_sorted():
+  let names = shortcodes()
+  | assert_eq(names, sort(names))
+end
+
+# -- to_emoji --
+
+def test_to_emoji_replaces_known_shortcodes():
+  assert_eq(to_emoji("I :fire: love :rocket:"), "I 🔥 love 🚀")
+end
+
+def test_to_emoji_leaves_unknown_shortcodes():
+  assert_eq(to_emoji("this is :not_a_real_shortcode:"), "this is :not_a_real_shortcode:")
+end
+
+def test_to_emoji_resolves_aliases():
+  assert_eq(to_emoji(":+1:"), "👍")
+end
+
+def test_to_emoji_no_shortcodes():
+  assert_eq(to_emoji("plain text"), "plain text")
+end
+
+# -- to_shortcode --
+
+def test_to_shortcode_replaces_known_emoji():
+  assert_eq(to_shortcode("I 🔥 love 🚀"), "I :fire: love :rocket:")
+end
+
+def test_to_shortcode_no_emoji():
+  assert_eq(to_shortcode("plain text"), "plain text")
+end
+
+# -- has_emoji --
+
+def test_has_emoji_true_for_shortcode():
+  assert_true(has_emoji("great :tada:"))
+end
+
+def test_has_emoji_true_for_literal():
+  assert_true(has_emoji("great 🎉"))
+end
+
+def test_has_emoji_false():
+  assert_false(has_emoji("plain text"))
+end
+
+def test_has_emoji_false_for_unknown_shortcode_pattern():
+  assert_false(has_emoji("this is :not_a_real_shortcode:"))
+end
+
+# -- strip --
+
+def test_strip_removes_shortcode_and_emoji():
+  assert_eq(strip("Great job :tada: 🎉 team"), "Great job team")
+end
+
+def test_strip_no_emoji():
+  assert_eq(strip("plain text"), "plain text")
+end
+
+# -- round trips --
+
+def test_round_trip_emoji_to_shortcode_to_emoji():
+  let original = "I 🔥 love 🚀"
+  | assert_eq(to_emoji(to_shortcode(original)), original)
+end
+
+# -- gitmoji --
+
+def test_gitmoji_feat():
+  assert_eq(gitmoji("feat"), "✨")
+end
+
+def test_gitmoji_fix():
+  assert_eq(gitmoji("fix"), "🐛")
+end
+
+def test_gitmoji_unknown_returns_none():
+  assert_none(gitmoji("not_a_type"))
+end
