@@ -20,16 +20,16 @@ cp emoji.mq ~/.local/mq/config/
 
 ### HTTP Import (no local installation needed)
 
-If `mq` was built with the `http-import` feature, you can import directly from GitHub without any local setup:
+HTTP imports are disabled by default; pass `--allow-http-import` to import directly from GitHub without any local setup:
 
 ```sh
-mq -I raw 'import "github.com/harehare/emoji.mq" | emoji::to_emoji(.)' README.md
+mq --allow-http-import -I raw 'import "github.com/harehare/emoji.mq" | emoji::to_emoji(.)' README.md
 ```
 
 Pin to a specific release with `@vX.Y.Z`:
 
 ```sh
-mq -I raw 'import "github.com/harehare/emoji.mq@v0.1.0" | ...'
+mq --allow-http-import -I raw 'import "github.com/harehare/emoji.mq@v0.1.0" | ...'
 ```
 
 ## Usage
